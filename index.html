@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>أحمد — بورتفوليو</title>
+  <meta name="description" content="بورتفوليو أحمد — مصمم ومطور واجهات. مشاريع، مهارات وتواصل.">
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,0.03);
+      --muted: #a8b3c7;
+      --accent1: #7c3aed;
+      --accent2: #06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 14px;
+      --container: 1100px;
+      --ff: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Naskh Arabic";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff);
+      background:
+        radial-gradient(800px 300px at 10% 10%, rgba(124,58,237,0.06), transparent),
+        radial-gradient(600px 220px at 90% 90%, rgba(6,182,212,0.04), transparent),
+        var(--bg);
+      color:#eaf0ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      scroll-behavior:smooth;
+    }
+
+    /* container */
+    .container{max-width:var(--container);margin:0 auto;padding:28px}
+
+    /* header */
+    header.site-header{
+      position:fixed;left:0;right:0;top:0;z-index:60;
+      background: linear-gradient(180deg, rgba(8,10,14,0.66), rgba(8,10,14,0.36));
+      backdrop-filter: blur(6px) saturate(120%);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--container);margin:0 auto;padding:12px 28px}
+    .brand{font-weight:700;font-size:18px;color:#fff;text-decoration:none}
+    .brand .dot{color:var(--accent1);margin-left:6px}
+    nav.main-nav{display:flex;gap:10px;align-items:center}
+    nav.main-nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:10px;transition:all .18s}
+    nav.main-nav a:hover, nav.main-nav a.active{color:#fff;background:rgba(255,255,255,0.02)}
+    .nav-toggle{display:none;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer}
+
+    /* hero */
+    .hero{padding:120px 0 60px;position:relative;overflow:hidden}
+    .hero-inner{display:flex;gap:36px;align-items:center;justify-content:space-between}
+    .hero-left{max-width:640px}
+    .hero h1{margin:0;font-size:34px;line-height:1.05}
+    .lead{color:var(--muted);margin:14px 0 18px}
+    .cta-group{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 16px;border-radius:12px;text-decoration:none;border:1px solid transparent;background:transparent;color:inherit;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;box-shadow:0 10px 30px rgba(7,9,15,0.6)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+
+    .hero-card{width:220px;height:220px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;box-shadow: 0 10px 30px rgba(2,6,23,0.6);transform:translateY(0)}
+    .avatar-glow{width:180px;height:180px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:6px;background:linear-gradient(135deg,var(--accent1),var(--accent2))}
+    .avatar-glow img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;border:4px solid rgba(0,0,0,0.25)}
+
+    /* sections */
+    section{padding:40px 0}
+    .cards{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    .skills .skill{margin-bottom:14px}
+    .skill .label{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:8px}
+    .bar{background:rgba(255,255,255,0.02);height:10px;border-radius:10px;overflow:hidden}
+    .bar > span{display:block;height:100%;width:0%;border-radius:10px;background:linear-gradient(90deg,var(--accent2),var(--accent1));transition:width .9s cubic-bezier(.2,.9,.2,1)}
+
+    /* projects grid */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+    .project{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .28s, box-shadow .28s}
+    .project:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+    .project img{width:100%;height:160px;object-fit:cover}
+    .p-meta{padding:12px}
+    .p-meta h3{margin:0;font-size:16px}
+    .tags{color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    .contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;outline:none}
+    .form-actions{display:flex;gap:10px;margin-top:8px}
+    .form-status{margin-top:10px;color:var(--muted)}
+
+    /* footer */
+    footer.site-footer{padding:18px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);margin-top:40px;text-align:center}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(2,6,23,0.7);z-index:999}
+    .modal.open{display:flex}
+    .modal-card{background:var(--card);max-width:900px;width:100%;border-radius:12px;overflow:hidden;display:flex;gap:16px;animation:pop .18s ease}
+    .modal-card img{width:420px;max-width:40%;height:100%;object-fit:cover}
+    .modal-info{padding:18px}
+    .modal-close{position:absolute;left:24px;top:20px;border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer}
+
+    /* small */
+    @media (max-width:1000px){
+      .projects-grid{grid-template-columns:repeat(2,1fr)}
+      .cards{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .hero-inner{flex-direction:column-reverse;align-items:flex-start}
+      .hero-card{align-self:flex-end;margin-bottom:12px}
+    }
+    @media (max-width:640px){
+      .projects-grid{grid-template-columns:1fr}
+      .nav-toggle{display:block}
+      nav.main-nav{position:fixed;left:0;top:0;height:100vh;width:260px;background:linear-gradient(180deg, rgba(7,10,15,0.98), rgba(7,10,15,0.98));flex-direction:column;padding-top:80px;transform:translateX(-110%);transition:transform .28s}
+      nav.main-nav.open{transform:translateX(0)}
+      .header-inner{padding:12px 18px}
+      .hero h1{font-size:26px}
+    }
+
+    /* utilities & animations */
+    .muted{color:var(--muted)}
+    .center{display:flex;align-items:center;justify-content:center}
+    @keyframes pop{from{transform:translateY(8px) scale(.995);opacity:0}to{transform:none;opacity:1}}
+    /* small floating for hero card */
+    .float { animation:float 4s ease-in-out infinite; }
+    @keyframes float { 0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)} }
+    /* focus visibility */
+    a:focus, button:focus, input:focus, textarea:focus{outline:2px solid rgba(124,58,237,0.25);outline-offset:2px}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="#home">Ahmed ALfeki
+        <span class="dot">.</span></a>
+      <nav class="main-nav" id="mainNav" role="navigation" aria-label="روابط الموقع">
+        <a href="#home" class="active">الرئيسية</a>
+        <a href="#about">عنّي</a>
+        <a href="#projects">أعمالي</a>
+        <a href="#contact">تواصل</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="home">
+    <section class="hero container" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <h1 id="heroTitle">أنا اسمي أحمد — مصمم ومطوّر واجهات  تفاعلية</h1>
+          <p class="lead">أبني واجهات سريعة، متجاوبة، ومتحركة بشكل أنيق — HTML، CSS، JavaScript. اعرض مشاريعك بشكل احترافي.</p>
+          <div class="cta-group">
+            <a class="btn primary" href="#projects">شاهد مشاريعي</a>
+            <a class="btn ghost" href="#contact">اطلب عرض</a>
+          </div>
+          <div style="margin-top:18px;color:var(--muted);font-size:14px">
+            <strong>خبرة:</strong> تطوير واجهات — <strong>المدينة:</strong> البحيره
+          </div>
+        </div>
+
+        <div class="hero-card float" aria-hidden="true">
+          <div class="avatar-glow">
+            <img src="img/ahmed.jpeg" alt="صورة شخصية">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ABOUT + SKILLS -->
+    <section id="about" class="container" aria-labelledby="aboutTitle">
+      <div class="cards">
+        <div class="card about">
+          <h2 id="aboutTitle">عنّي</h2>
+          <p class="muted">مطور واجهات Frontend أركز على الأداء والتجربة. أستخدم HTML/CSS/JS لعمل واجهات قابلة للتوسع، وأحب تصميم تفاعلي مع تفاصيل حركة دقيقة.</p>
+
+          <h3 style="margin-top:14px">الخبرات</h3>
+          <ul class="muted" style="padding-left:16px;margin:8px 0 0">
+            <li><strong>2022 — الآن:</strong> مشاريع مستقلة وتصميم واجهات لشركات ناشئة.</li>
+            <li><strong>2019 — 2022:</strong> مطور واجهات في وكالة رقمية.</li>
+          </ul>
+
+          <div style="margin-top:12px">
+            <a class="btn primary" href="#contact">طلب عرض</a>
+            <a class="btn ghost" href="#projects">مشاريعي</a>
+          </div>
+        </div>
+
+        <aside class="card skills" aria-labelledby="skillsTitle">
+          <h3 id="skillsTitle">المهارات</h3>
+
+          <div class="skill">
+            <div class="label"><span>HTML & CSS</span><span class="muted">95%</span></div>
+            <div class="bar"><span data-w="95%"></span></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>JavaScript</span><span class="muted">90%</span></div>
+            <div class="bar"><span data-w="90%"></span></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>Responsive & Accessibility</span><span class="muted">93%</span></div>
+            <div class="bar"><span data-w="93%"></span></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>Animations & UX</span><span class="muted">88%</span></div>
+            <div class="bar"><span data-w="88%"></span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="container" aria-labelledby="projectsTitle">
+      <h2 id="projectsTitle">مشاريعي المميزة</h2>
+      <p class="muted" style="margin-top:6px">نماذج واجهات عملت عليها — اضغط على "عرض" لفتح تفاصيل المشروع.</p>
+
+      <div class="projects-grid" id="projGrid">
+        <article class="project" data-title="واجهة متجر إلكتروني" data-desc="واجهة متجر إلكتروني متجاوبة مع فلترة ديناميكية وتجربة سريعة." data-img="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop" alt="مشروع متجر">
+          <div class="p-meta">
+            <h3>واجهة متجر إلكتروني</h3>
+            <div class="tags">E-commerce • Performance</div>
+            <div style="margin-top:10px">
+              <button class="btn small open-project">عرض</button>
+              <a class="btn ghost" href="#" onclick="event.preventDefault()">كود</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-title="لوحة تحكم تفاعلية" data-desc="Dashboard تفاعلي مع رسوم بيانية وحالة تحميل سلسة." data-img="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1400&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1400&auto=format&fit=crop" alt="مشروع داشبورد">
+          <div class="p-meta">
+            <h3>لوحة تحكم تفاعلية</h3>
+            <div class="tags">Dashboard • Charts</div>
+            <div style="margin-top:10px">
+              <button class="btn small open-project">عرض</button>
+              <a class="btn ghost" href="#" onclick="event.preventDefault()">كود</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-title="موقع شركة تقنية" data-desc="صفحة هبوط (Landing) مع تأثيرات تدفق المحتوى وتجربة تحويل عالية." data-img="https://images.unsplash.com/photo-1508385082359-f6a5747f5b2b?q=80&w=1400&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1508385082359-f6a5747f5b2b?q=80&w=1400&auto=format&fit=crop" alt="مشروع شركة">
+          <div class="p-meta">
+            <h3>موقع شركة تقنية</h3>
+            <div class="tags">Landing • UX</div>
+            <div style="margin-top:10px">
+              <button class="btn small open-project">عرض</button>
+              <a class="btn ghost" href="#" onclick="event.preventDefault()">كود</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="container" aria-labelledby="ctaTitle">
+      <div class="card center" style="flex-direction:column;gap:12px">
+        <h2 id="ctaTitle">هل لديك مشروع؟</h2>
+        <p class="muted">أرسل فكرة المشروع أو المتطلبات وسأرد عليك بخطة العمل وتقدير التكلفة.</p>
+        <div>
+          <a class="btn primary" href="#contact">ابدأ الآن</a>
+          <a class="btn ghost" href="#projects">مشاهدة المزيد</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container" aria-labelledby="contactTitle">
+      <h2 id="contactTitle">تواصل معي</h2>
+      <p class="muted" style="margin-top:6px">أرسل رسالة بملخص المشروع أو مرفقات، وسأرد خلال 24 ساعة عادةً.</p>
+
+      <div class="contact-grid" style="margin-top:16px">
+        <form id="contactForm" class="contact-form card" novalidate>
+          <label style="display:block;margin-bottom:8px">
+            <div class="muted" style="margin-bottom:6px">الاسم</div>
+            <input type="text" name="name" required placeholder="اسمك">
+          </label>
+
+          <label style="display:block;margin-bottom:8px">
+            <div class="muted" style="margin-bottom:6px">البريد الإلكتروني</div>
+            <input type="email" name="email" required placeholder="ahmedmohmedabdalmagide@gamil.com">
+          </label>
+
+          <label style="display:block;margin-bottom:8px">
+            <div class="muted" style="margin-bottom:6px">الرسالة</div>
+            <textarea name="message" rows="6" required placeholder="أخبرني عن المشروع"></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">أرسل</button>
+            <button type="reset" class="btn ghost">إعادة</button>
+          </div>
+
+          <p id="formStatus" class="form-status" aria-live="polite"></p>
+        </form>
+
+        <aside class="card">
+          <h3>معلومات تواصل</h3>
+          <ul style="list-style:none;padding:0;margin:12px 0 0;color:var(--muted)">
+            <li>البريد: <a href="ahmedmohmedabdalmagide@gamil.com">you@example.com</a></li>
+            <li>الهاتف: <a href="tel:+201234567890">+20 1283624917</a></li>
+            <li>المكان: القاهرة، مصر</li>
+          </ul>
+
+          <div style="margin-top:14px;color:var(--muted);font-size:14px">
+            أوقات الرد: عادة خلال 24 ساعة. يمكنك أيضًا إرسال تفاصيل المشروع عبر البريد.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="color:var(--muted)">© <span id="year"></span> أحمد — جميع الحقوق محفوظة.</div>
+          <div style="display:flex;gap:12px">
+            <a href="#" class="muted" aria-label="GitHub">GitHub</a>
+            <a href="#" class="muted" aria-label="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- PROJECT MODAL -->
+  <div id="projectModal" class="modal" aria-hidden="true" aria-labelledby="modalTitle" role="dialog">
+    <div class="modal-card" role="document">
+      <img id="modalImage" src="" alt="">
+      <div class="modal-info">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc" class="muted"></p>
+        <div style="margin-top:12px">
+          <a id="modalLive" class="btn primary" href="#" target="_blank">عرض مباشر</a>
+          <button id="modalClose" class="btn ghost" style="margin-right:8px">إغلاق</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // basic interactions
+    (function(){
+      // set year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // mobile nav
+      const nav = document.getElementById('mainNav');
+      const navToggle = document.getElementById('navToggle');
+      navToggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      // active nav on scroll
+      const sections = document.querySelectorAll('main section[id]');
+      const navLinks = document.querySelectorAll('nav a');
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const id = entry.target.id;
+          const link = document.querySelector('nav a[href="#' + id + '"]');
+          if(entry.isIntersecting){
+            navLinks.forEach(a=>a.classList.remove('active'));
+            if(link) link.classList.add('active');
+          }
+        });
+      }, {threshold: 0.4});
+      sections.forEach(s=>observer.observe(s));
+
+      // animate skill bars when visible
+      const skillBars = document.querySelectorAll('.bar > span');
+      const skillsSection = document.getElementById('about');
+      const skillObs = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            skillBars.forEach(s=>{
+              const w = s.getAttribute('data-w') || '80%';
+              s.style.width = w;
+            });
+            obs.disconnect();
+          }
+        });
+      }, {threshold:0.25});
+      if(skillsSection) skillObs.observe(skillsSection);
+
+      // floating hero card subtle motion handled by CSS keyframes; enhance on pointermove
+      const hero = document.querySelector('.hero-card');
+      if(hero){
+        document.addEventListener('pointermove', (e)=>{
+          const rect = hero.getBoundingClientRect();
+          const dx = (e.clientX - (rect.left + rect.width/2)) * 0.02;
+          const dy = (e.clientY - (rect.top + rect.height/2)) * 0.02;
+          hero.style.transform = translate3d(${dx}px, ${dy}px, 0);
+          clearTimeout(hero._t);
+          hero._t = setTimeout(()=> hero.style.transform = '', 220);
+        });
+      }
+
+      // project modal
+      const projBtns = document.querySelectorAll('.open-project');
+      const modal = document.getElementById('projectModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalLive = document.getElementById('modalLive');
+      const modalClose = document.getElementById('modalClose');
+
+      function openModal(card){
+        modalImg.src = card.dataset.img || card.querySelector('img')?.src;
+        modalImg.alt = card.dataset.title || 'Project image';
+        modalTitle.textContent = card.dataset.title || '';
+        modalDesc.textContent = card.dataset.desc || '';
+        modalLive.href = card.dataset.live || '#';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+      projBtns.forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          const card = e.target.closest('.project');
+          if(card) openModal(card);
+        });
+      });
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
+
+      // contact form (local simulation)
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      if(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          status.textContent = 'جاري الإرسال...';
+          const data = new FormData(form);
+          // basic validation
+          const name = data.get('name').trim();
+          const email = data.get('email').trim();
+          const msg = data.get('message').trim();
+          if(!name || !email || !msg){
+            status.textContent = 'اكمل البيانات المطلوبة';
+            return;
+          }
+          // simulate send
+          setTimeout(()=>{
+            status.textContent = 'تم الإرسال! سأرد عليك خلال 24 ساعة.';
+            form.reset();
+          }, 900);
+        });
+      }
+
+      // reduce motion for users who prefer it
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefersReduced){
+        document.querySelectorAll('.float').forEach(el=>el.style.animation = 'none');
+      }
+
+      // accessible skip to content (if keyboard user)
+      const skip = document.createElement('a');
+      skip.href = '#home';
+      skip.textContent = 'تخطى إلى المحتوى';
+      skip.style.position = 'absolute';
+      skip.style.left = '10px';
+      skip.style.top = '10px';
+      skip.style.background = '#000';
+      skip.style.color = '#fff';
+      skip.style.padding = '6px 10px';
+      skip.style.borderRadius = '6px';
+      skip.style.transform = 'translateY(-120%)';
+      skip.addEventListener('focus', ()=> skip.style.transform = 'translateY(0)');
+      skip.addEventListener('blur', ()=> skip.style.transform = 'translateY(-120%)');
+      document.body.prepend(skip);
+
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- لعبة إكس أو -->
+<!-- <!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لعبة إكس أو</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin: auto;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background: rgb(117, 79, 122);
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid #333;
+    }
+    .cell.taken {
+      cursor: not-allowed;
+    }
+    .winner {
+      margin-top: 20px;
+      font-size: 22px;
+      color: green;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 لعبة إكس أو</h1>
+  <div class="board" id="board"></div>
+  <div class="winner" id="winner"></div>
+  <button onclick="resetGame()">إعادة اللعب 🔄</button>
+
+  <script>
+    const boardEl = document.getElementById("board");
+    const winnerEl = document.getElementById("winner");
+    let currentPlayer = "X";
+    let board = Array(9).fill("");
+
+    // إنشاء المربعات
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.dataset.index = i;
+      cell.addEventListener("click", handleClick);
+      boardEl.appendChild(cell);
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (board[index] || winnerEl.textContent) return;
+
+      board[index] = currentPlayer;
+      e.target.textContent = currentPlayer;
+      e.target.classList.add("taken");
+
+      if (checkWinner()) {
+        winnerEl.textContent = "🎉 لقد ربحت " + currentPlayer + "!";
+        return;
+      }
+
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+    }
+
+    function checkWinner() {
+      const winningCombinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // صفوف
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // أعمدة
+        [0, 4, 8], [2, 4, 6]             // أقطار
+      ];
+      return winningCombinations.some(combination => {
+        const [a, b, c] = combination;
+        return board[a] && board[a] === board[b] && board[a] === board[c];
+      });
+    }
+
+    function resetGame() {
+      board.fill("");
+      currentPlayer = "X";
+      winnerEl.textContent = "";
+      document.querySelectorAll(".cell").forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("taken");
+      });
+    }
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+<!-- متجر الملابس والأحذية -->
+<!-- <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>متجر الملابس والأحذية</title>      -->
+  <!-- <style>
+    body {font-family: Tahoma, Arial; margin:0; background:#f4f4f9;}
+    header {background:#222; color:#fff; padding:15px; text-align:center;}
+    .container {display:flex; gap:20px; padding:20px;}
+    .products {flex:3; display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px;}
+    .product {background:#fff; border:1px solid #ccc; border-radius:10px; overflow:hidden;}
+    .product img {width:100%; height:150px; object-fit:cover;}
+    .product .info {padding:10px;}
+    .product h3 {margin:0 0 5px;}
+    .product p {margin:0; color:#666;}
+    .product button {margin-top:10px; padding:5px 10px; border:none; border-radius:6px; cursor:pointer;}
+    .buy {background:#28a745; color:#fff;}
+    .delete {background:#dc3545; color:#fff; margin-right:5px;}
+    .cart {flex:1; background:#fff; border:1px solid #ccc; border-radius:10px; padding:10px;}
+    .cart h2 {margin-top:0; text-align:center;}
+    .cart-item {display:flex; align-items:center; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee;}
+    .total {font-weight:bold; margin-top:10px; text-align:center;}
+    .checkout {background:#007bff; color:#fff; border:none; border-radius:8px; padding:10px; width:100%; margin-top:10px; cursor:pointer;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛍 متجر الملابس والأحذية</h1>
+  </header>
+
+  <div class="container">
+    قائمة المنتجات -->
+    <!-- <div class="products" id="product-list">
+      
+    </div>
+
+    
+    <div class="cart">
+      <h2>سلة المشتريات</h2>
+      <div id="cart-items"></div>
+      <div class="total">الإجمالي: <span id="total">0</span> ج.م</div>
+      <button class="checkout" onclick="checkout()">إتمام الشراء</button>
+    </div>
+  </div> -->
+<!-- 
+  <script>
+    const products = [
+      {id:1, name:"تي-شيرت قطن", price:299, img:"https://th.bing.com/th/id/OIP.isPrPaJ5Qd2DYIWr-5dfgQHaHa?w=210&h=210&c=7&r=0&o=5&pid=1.7"},
+      {id:2, name:"قميص كاجوال", price:449, img:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400"},
+      {id:3, name:"حذاء رياضي", price:699, img:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=400"},
+      {id:4, name:"حذاء كاجوال", price:549, img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400"},
+      {id:5, name:"بنطال جينز", price:499, img:"https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?auto=format&fit=crop&w=400"},
+      {id:6, name:"حذاء رسمي", price:799, img:"https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=400"}
+    ];
+
+    let cart = [];
+
+    // عرض المنتجات
+    const productList = document.getElementById("product-list");
+    function renderProducts(){
+      productList.innerHTML = "";
+      products.forEach(p=>{
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <div class="info">
+            <h3>${p.name}</h3>
+            <p>${p.price} ج.م</p>
+            <button class="buy" onclick="addToCart(${p.id})">شراء</button>
+            <button class="delete" onclick="deleteProduct(${p.id})">حذف</button>
+          </div>
+        `;
+        productList.appendChild(div);
+      });
+    }
+
+    // عرض العربة
+    function renderCart(){
+      const cartDiv = document.getElementById("cart-items");
+      const totalSpan = document.getElementById("total");
+      cartDiv.innerHTML = "";
+      let total = 0;
+      cart.forEach(item=>{
+        total += item.price * item.qty;
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <span>${item.name} × ${item.qty}</span>
+          <button onclick="removeFromCart(${item.id})">×</button>
+        `;
+        cartDiv.appendChild(div);
+      });
+      totalSpan.textContent = total;
+    }
+
+    // إضافة للعربة
+    function addToCart(id){
+      const product = products.find(p=>p.id===id);
+      if(!product) return;
+      const item = cart.find(c=>c.id===id);
+      if(item){ item.qty++; } else { cart.push({...product, qty:1}); }
+      renderCart();
+    }
+
+    // حذف من المتجر
+    function deleteProduct(id){
+      const index = products.findIndex(p=>p.id===id);
+      if(index>-1) products.splice(index,1);
+      cart = cart.filter(c=>c.id!==id);
+      renderProducts();
+      renderCart();
+    }
+
+    // حذف من العربة فقط
+    function removeFromCart(id){
+      cart = cart.filter(c=>c.id!==id);
+      renderCart();
+    }
+
+    function checkout(){
+      if(cart.length===0){ alert("العربة فارغة!"); return; }
+      alert("تم الشراء بنجاح (تجريبي) ✅");
+      cart = [];
+      renderCart();
+    }
+
+    renderProducts();
+    renderCart();
+  </script> -->
+<!-- </body>
+</html> -->
+
+ <!-- <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+body{
+      color: aqua;
+    }
+  </style>
+ </head>
+ <body>
+  ahmed
+
+  <hr>
+  mohamed
+  <hr>
+ </body>
+ </html> -->
+ 
+ 
+ 
+ 
+ <!-- <!DOCTYPE html>
+ <html lang="en">
+ <head> 
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    </head>
+ <body>
+<div class="card" style="width: 18rem; ">
+  <img src="ahmed.jpg" class="card-img-top" >
+  <div class="card-body">
+    <h5 class="card-title" style="direction: rtl;">الاستاذ:احمدمحمدالفقي</h5>
+    <p class="card-text">محامي لدي محاكم النقض 
+            ومحاكم القضاء الاداري
+
+    </p>
+    <a href="#" class="btn btn-primary">تواصل معانا</a>
+  </div>
+</div>
+ </body>
+ </html> -->
+
+
+ 
+ 
+ 
+ <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="input">
+    <h2>Add Text</h2>
+    <div class="data">
+      <input type="text" id="inp">
+  <button id="btn">Add</button>
+    </div>
+
+  </div>
+
+  <div class="list">
+
+<div class="box">
+  <h2>Box</h2>
+
+</div>
+
+<div class="box">
+  <h2>Box</h2>
+</div>
+
+<div class="box">
+  <h2>Box</h2>
+</div>
+
+
+<div class="box">
+  <h2>Box</h2>
+</div>
+
+  </div>
+
+  <script src="java.js"></script>
+</body>
+</html>   -->
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>python</h1>
+<img src="1.jpg" alt="">
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nulla magnam temporibus deserunt corporis iure minima earum eius architecto odit impedit doloribus, alias ratione nemo reiciendis. Amet voluptas delectus perferendis</p>
+<hr>
+<ul>
+<li>ahmed</li>
+<li>mohamed</li>
+
+
+</ul>
+<hr id="hr-last">
+
+</body>
+
+
+</html> -->
